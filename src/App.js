@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Component1 from './Component1';
+import Component2 from './Component2';
+import Component3 from './Component3';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+  const [currentComponent, setCurrentComponent] = useState('Component1');
+
+  const handleComponentChange = (componentName) => {
+    setCurrentComponent(componentName);
+  };
+
+  const user = [
+    {
+      current: 'Component1',
+      component: <Component1 onComponentChange={handleComponentChange} />,
+    },
+    {
+      current: 'Component2',
+      component: <Component2 onComponentChange={handleComponentChange} />,
+    },
+    {
+      current: 'Component3',
+      component: <Component3 onComponentChange={handleComponentChange} />,
+    },
+  ];
+
+  const userChoice = user.find((user) => user.current === currentComponent);
+
+  return <div>{userChoice.component}</div>;
 }
-
-export default App;
